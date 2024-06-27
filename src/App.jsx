@@ -7,6 +7,7 @@ function lastNewId(){
   return lastId ++;
 }
 
+
 function App() {
 
   const [todos, setTodos] = useState([]);
@@ -30,9 +31,10 @@ function App() {
   setTodos(updateTodo)
   }
 
-  function deleteTodo(todoId){
-    const updateTodo = todos.filter((todo) => todo.id !== todoId)
-    setTodos(updateTodo)
+ 
+  function deleteTodo  (todoId) {
+    const updateTodos = todos.filter((todo) => todo.id !== todoId)
+    setTodos(updateTodos)
   }
 
 
