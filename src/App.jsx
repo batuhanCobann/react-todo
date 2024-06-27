@@ -23,7 +23,19 @@ function App() {
     setTodos([ ...todos, newTodoItem ])
   }
 
-  console.log(todos);
+  function completedTodo(todoId){
+    const updateTodo =  todos.map((todo) =>
+    todo.id == todoId ? {...todo, copleted: !todo.copleted } : todo 
+  );
+  setTodos(updateTodo)
+  }
+
+  function deleteTodo(todoId){
+    const updateTodo = todos.filter((todo) => todo.id !== todoId)
+    setTodos(updateTodo)
+  }
+
+
   return (
     <>
       <input 
@@ -33,7 +45,11 @@ function App() {
 
       <button onClick={addTodo}>Add Todo</button>
       {todos.map(todo => (
-        <p className={todo.copleted ? "okey-todo" : "no-todo"} key={todo.id}>{todo.title} <button>Delete</button></p>
+        <p className={todo.copleted ? "okey-todo" : "no-todo"} 
+        key={todo.id}> 
+        <span>{todo.title}</span> 
+        <button onClick={() => completedTodo(todo.id)}>{todo.copleted ? "Geri Al" : "Tamamla" }</button> 
+        <button onClick={() => deleteTodo(todo.id)}>Delete</button></p>
       ))}
     </>
   )
