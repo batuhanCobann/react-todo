@@ -30,3 +30,11 @@ body {
   min-height: 100vh;
 }
 
+.okey-todo{
+  color: green;
+  text-decoration: line-through
+}
+
+.no-todo{
+  color: red
+}
