@@ -53,26 +53,32 @@ function App() {
 
   return (
     <>
-      <input 
+      <textarea 
       className='todo-input'
       type="text" 
       placeholder='Lütfen Bir Görev Giriniz...' 
       onChange={(e) => setNewTodoTitle(e.target.value)} />
 
+      <br />
+
       <button onClick={addTodo}>Add Todo</button>
+
       {todos.map(todo => (
-        <p className={todo.copleted ? "okey-todo" : "no-todo"} 
-        key={todo.id}> 
-        <span>{todo.title}</span> 
-        {todo.edit ? <input type="text" placeholder='Todo Düzenle' value={editTodo} onChange={(e) => setEditTodo(e.target.value)} /> 
-        : <button onClick={() => completedTodo(todo.id)}>{todo.copleted ? "Geri Al" : "Tamamla" }</button>}
-         
-        <button onClick={() => deleteTodo(todo.id)}>Delete</button>
-        {todo.edit ? <button onClick={() => saveNewTodo(todo.id)}>Kaydet</button> : <button onClick={() => changeNewTodo(todo.id)}>Düzenle</button>}
+        <div>
+          <p className={todo.copleted ? "okey-todo" : "no-todo"} key={todo.id}> 
+            <span>{todo.title}</span> 
+            {todo.edit ? 
+            <input type="text" placeholder='Todo Düzenle' value={editTodo} onChange={(e) => setEditTodo(e.target.value)} /> 
+            : <button onClick={() => completedTodo(todo.id)}>{todo.copleted ? "Geri Al" : "Tamamla" }</button>}
+          
+            <button onClick={() => deleteTodo(todo.id)}>Delete</button>
+
+            {todo.edit ? 
+            <button onClick={() => saveNewTodo(todo.id)}>Kaydet</button> 
+            : <button onClick={() => changeNewTodo(todo.id)}>Düzenle</button>}
+         </p>
+        </div>
         
-        
-        
-        </p>
       ))}
     </>
   )
