@@ -1,11 +1,22 @@
 import { useState } from 'react'
 import './App.css'
+import { RiDeleteBin6Line } from "react-icons/ri";
+import { FaEdit } from "react-icons/fa";
+import { MdOutlineSaveAlt } from "react-icons/md";
+import { MdFileDownloadDone } from "react-icons/md";
+import { MdOutlineReplay } from "react-icons/md";
 
 let lastId = 1;
 
 function lastNewId(){
   return lastId ++;
 }
+
+
+let date = new Date();
+
+let datestring = ("0" + date.getDate()).slice(-2) + "-" + ("0"+(date.getMonth()+1)).slice(-2) + "-" +
+date.getFullYear() + " " + ("0" + date.getHours()).slice(-2) + ":" + ("0" + date.getMinutes()).slice(-2);
 
 
 function App() {
@@ -53,33 +64,39 @@ function App() {
 
   return (
     <>
-      <textarea 
-      className='todo-input'
-      type="text" 
-      placeholder='Lütfen Bir Görev Giriniz...' 
-      onChange={(e) => setNewTodoTitle(e.target.value)} />
-
-      <br />
-
-      <button onClick={addTodo}>Add Todo</button>
-
+    <div className='new-todo-div'>
+      <input 
+        className='todo-input'
+        type="text" 
+        placeholder='Lütfen Bir Görev Giriniz...' 
+        onChange={(e) => setNewTodoTitle(e.target.value)}
+        required />
+        <button className='addBtn' onClick={addTodo}>Add</button>
+    </div>
       {todos.map(todo => (
-        <div>
-          <p className={todo.copleted ? "okey-todo" : "no-todo"} key={todo.id}> 
-            <span>{todo.title}</span> 
-            {todo.edit ? 
-            <input type="text" placeholder='Todo Düzenle' value={editTodo} onChange={(e) => setEditTodo(e.target.value)} /> 
-            : <button onClick={() => completedTodo(todo.id)}>{todo.copleted ? "Geri Al" : "Tamamla" }</button>}
+      <div className='todos'>
+          <p className={todo.copleted 
+            ? "okey-todo todo"  
+            : "no-todo todo"} key={todo.id}>
+           <span>{todo.title}</span> </p>
+           <div className='btns-div'>
+          {todo.edit ? 
+            <input className='edit-input' type="text" placeholder='Todo Düzenle' value={editTodo} onChange={(e) => setEditTodo(e.target.value)} /> 
+            : <button className='edit-okey-btn' onClick={() => completedTodo(todo.id)}>{todo.copleted ? <MdOutlineReplay style={{width:"30px", height:"18px"}}  /> : <MdFileDownloadDone style={{width:"30px", height:"18px"}}  /> }</button>}
           
-            <button onClick={() => deleteTodo(todo.id)}>Delete</button>
+            <button className='delete-btn' onClick={() => deleteTodo(todo.id)}><RiDeleteBin6Line style={{width:"30px", height:"18px"}}  /></button>
 
             {todo.edit ? 
-            <button onClick={() => saveNewTodo(todo.id)}>Kaydet</button> 
-            : <button onClick={() => changeNewTodo(todo.id)}>Düzenle</button>}
-         </p>
+            <button className='save-btn' onClick={() => saveNewTodo(todo.id)}><MdOutlineSaveAlt style={{width:"30px", height:"18px"}}  /></button> 
+              : <button className='edit-btn' onClick={() => changeNewTodo(todo.id)}><FaEdit style={{width:"30px", height:"18px"}} /></button>}
+              <p>{todo.edit ? "" : datestring }</p>
+           </div>
         </div>
         
       ))}
+
+
+
     </>
   )
 }
