@@ -1,10 +1,10 @@
 import { useState } from 'react'
-import './App.css'
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { FaEdit } from "react-icons/fa";
 import { MdOutlineSaveAlt } from "react-icons/md";
 import { MdFileDownloadDone } from "react-icons/md";
 import { MdOutlineReplay } from "react-icons/md";
+import './App.css'
 
 let lastId = 1;
 
